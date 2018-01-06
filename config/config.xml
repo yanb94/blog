@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<database host="localhost" db="blog_op" user="root" password=""/>
+	<role_hierarchy>
+		<role name="ROLE_ADMIN">
+			<role_child name="ROLE_USER"></role_child>
+		</role>
+	</role_hierarchy>
+</config>

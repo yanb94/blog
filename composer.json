@@ -1,0 +1,11 @@
+{
+    "require-dev": {
+        "phpro/grumphp": "^0.12.1"
+    },
+    "autoload": {
+    	"psr-4": {
+    		"Framework\\": "lib/",
+    		"Application\\": "src/"
+    	}
+    }
+}
