@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<routes>
+		<route name="adminHome" controller="Admin" action="adminHome" url="/">
+		</route>
+		<route name="addBlog" controller="Admin" action="addBlog" url="/addBlog">
+		</route>
+		<route name="editBlog" controller="Admin" action="editBlog" url="/editBlog-{id}">
+			<param name="id" requirement="\d"/>
+		</route>
+		<route name="removeBlog" controller="Admin" action="removeBlog" url="/removeBlog-{id}">
+			<param name="id" requirement="\d"/>
+		</route>
+		<route name="validateComment" controller="Admin" action="validateComment" url="/validateComment-{id}">
+			<param name="id" requirement="\d"/>
+		</route>
+		<route name="deleteComment" controller="Admin" action="deleteComment" url="/deleteComment-{id}">
+			<param name="id" requirement="\d"/>
+		</route>
+	</routes>
+</config>

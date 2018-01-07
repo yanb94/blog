@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Framework;
 
 use Framework\App;
