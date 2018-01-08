@@ -10,6 +10,8 @@ class Article extends Entity
     protected $author;
     protected $updatedAt;
 
+    protected $authorName;
+
     public function getTitre(): string
     {
         return $this->titre;
@@ -48,6 +50,16 @@ class Article extends Entity
     public function setAuthor(string $author)
     {
         $this->author = $author;
+    }
+
+    public function getAuthorName(): string
+    {
+        return $this->authorName;
+    }
+
+    public function setAuthorName(string $authorName)
+    {
+        $this->authorName = $authorName;
     }
 
     public function getUpdatedAt(): \DateTime
