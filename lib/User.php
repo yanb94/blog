@@ -2,6 +2,8 @@
 
 namespace Framework;
 
+use Framework\UserInterface;
+
 class User extends AppComponent
 {
     public function getAttribute(string $attr): bool
@@ -34,7 +36,7 @@ class User extends AppComponent
         return isset($_SESSION['role']) ? $_SESSION['role'] : null;
     }
 
-    public function setMember($member)
+    public function setMember(UserInterface $member)
     {
         $_SESSION['user'] = $member;
     }
