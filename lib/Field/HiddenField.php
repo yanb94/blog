@@ -14,7 +14,10 @@ class HiddenField extends Field
 
         $widget .= "<imput type='".HiddenField::TYPE."' ";
         $widget .= "id='".$this->getName()."' name='".$this->getName()."' ";
-        $widget .= "value='".$this->getValue()."' ";
+        
+        if (!empty($this->value)) {
+            $widget .= "value='".htmlspecialchars($this->getValue())."' ";
+        }
 
         $widget .= "/>";
 

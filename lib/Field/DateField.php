@@ -32,7 +32,11 @@ class DateField extends Field
         $widget .= ">";
 
         for ($i=1; $i < 32; $i++) {
-            $widget .= "<option>".$i."</option>";
+            if (!empty($this->value) and $this->value['day'] == $i) {
+                $widget .= "<option value='".$i."' selected >".$i."</option>";
+            } else {
+                $widget .= "<option value='".$i."' >".$i."</option>";
+            }
         }
 
         $widget .= "</select>";
@@ -46,7 +50,11 @@ class DateField extends Field
         $widget .= ">";
 
         for ($i=1; $i < 13; $i++) {
-            $widget .= "<option>".$i."</option>";
+            if (!empty($this->value) and $this->value['month'] == $i) {
+                $widget .= "<option value='".$i."' selected >".$i."</option>";
+            } else {
+                $widget .= "<option value='".$i."' >".$i."</option>";
+            }
         }
 
         $widget .= "</select>";
@@ -61,7 +69,11 @@ class DateField extends Field
 
 
         for ($i = $this->maxYear; $i > $this->minYear; $i--) {
-            $widget .= "<option>".$i."</option>";
+            if (!empty($this->value) and $this->value['year'] == $i) {
+                $widget .= "<option value='".$i."' selected >".$i."</option>";
+            } else {
+                $widget .= "<option value='".$i."' >".$i."</option>";
+            }
         }
 
         $widget .= "</select>";
