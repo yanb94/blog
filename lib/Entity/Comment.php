@@ -15,7 +15,7 @@ class Comment extends Entity
     protected $authorName;
     protected $articleName;
 
-    public function getContenu(): string
+    public function getContenu()
     {
         return $this->contenu;
     }

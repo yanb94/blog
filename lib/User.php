@@ -93,4 +93,13 @@ class User extends AppComponent
     {
         $_SESSION['flash'] = $value;
     }
+
+    public function getCrsfToken()
+    {
+        if (!isset($_SESSION['crsf_token'])) {
+            $_SESSION['crsf_token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+        }
+
+        return $_SESSION['crsf_token'];
+    }
 }

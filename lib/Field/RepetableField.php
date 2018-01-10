@@ -13,11 +13,21 @@ class RepetableField extends Field
         $this->fields = $fields;
     }
 
+    public function setValue($values)
+    {
+        parent::setValue($values);
+
+        foreach ($this->fields as $field) {
+            $field->setValue($this->value[$field->getName()]);
+        }
+    }
+
     public function buildWidget(): string
     {
         $widget = "";
 
         $lastFieldsIndex = count($this->fields);
+
 
         $i = 1;
         foreach ($this->fields as $field) {
@@ -29,14 +39,34 @@ class RepetableField extends Field
                     $br = "</br>";
                 }
 
-                $fields->setErrorMessage($msgInitial." ".$br.$this->errorMessage);
+                $field->setErrorMessage($msgInitial." ".$br.$this->errorMessage);
             }
 
-            $widget .=  $fields->buildWidget();
+            $fieldName = $field->getName();
+            $field->setName($this->name."[".$fieldName."]");
+
+            $widget .=  $field->buildWidget();
 
             $i++;
         }
 
         return $widget;
+    }
+
+    public function isValid():bool
+    {
+        $valid = parent::isValid();
+
+        foreach ($this->fields as $field) {
+            foreach ($field->getValidators() as $validator) {
+                if (!$validator->isValid($field->getValue())) {
+                    $field->setErrorMessage($validator->getErrorMessage());
+                    $valid = false;
+                    break;
+                }
+            }
+        }
+
+        return $valid;
     }
 }

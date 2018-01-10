@@ -11,6 +11,12 @@ class PasswordField extends StringField
     public function __construct(array $options = [])
     {
         parent::__construct($options);
-        unset($this->value);
+    }
+
+    public function buildWidget(): string
+    {
+        $this->value = null;
+
+        return parent::buildWidget();
     }
 }
