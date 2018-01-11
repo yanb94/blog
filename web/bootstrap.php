@@ -1,8 +1,8 @@
 <?php
+require '../vendor/autoload.php';
+
 session_start();
 session_regenerate_id();
-
-require '../vendor/autoload.php';
 
 use Framework\App;
 
