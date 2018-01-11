@@ -12,6 +12,9 @@ class Comment extends Entity
     protected $article;
     protected $validate;
 
+    protected $authorName;
+    protected $articleName;
+
     public function getContenu(): string
     {
         return $this->contenu;
@@ -60,5 +63,25 @@ class Comment extends Entity
     public function setValidate(bool $validate)
     {
         $this->validate = $validate;
+    }
+
+    public function getAuthorName(): string
+    {
+        return $this->authorName;
+    }
+
+    public function setAuthorName(string $authorName)
+    {
+        $this->authorName = $authorName;
+    }
+
+    public function getArticleName(): int
+    {
+        return $this->articleName;
+    }
+
+    public function setArticleName(string $articleName)
+    {
+        $this->articleName = $articleName;
     }
 }

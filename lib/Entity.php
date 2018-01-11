@@ -4,7 +4,7 @@ namespace Framework;
 
 use Framework\Hydrator;
 
-class Entity implements \ArrayAccess
+abstract class Entity implements \ArrayAccess
 {
     use Hydrator;
 
