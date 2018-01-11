@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<master-router>
+		<module name="Public"/>
+		<module name="Admin" prefix="/admin" role="ROLE_ADMIN" />
+	</master-router>
+</config>

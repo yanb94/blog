@@ -1,0 +1,14 @@
+{
+    "require-dev": {
+        "phpro/grumphp": "^0.12.1",
+        "jakub-onderka/php-parallel-lint": "^0.9.2",
+        "sensiolabs/security-checker": "^4.1",
+        "squizlabs/php_codesniffer": "^3.2"
+    },
+    "autoload": {
+    	"psr-4": {
+    		"Framework\\": "lib/",
+    		"Application\\": "src/"
+    	}
+    }
+}
