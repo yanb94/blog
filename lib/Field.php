@@ -98,7 +98,7 @@ abstract class Field
         $this->class = $class;
     }
 
-    public function getErrorMessage():string
+    public function getErrorMessage()
     {
         return $this->errorMessage;
     }

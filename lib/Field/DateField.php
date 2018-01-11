@@ -23,7 +23,7 @@ class DateField extends Field
         }
 
 
-        $widget .= "<select id='".$this->name."' name='".$this->name."['day']' ";
+        $widget .= "<select id=\"".$this->name."[day]\" name=\"".$this->name."[day]\" ";
 
         if (!empty($this->classCss)) {
             $widget .= "class='".$this->classCss."' ";
@@ -41,7 +41,7 @@ class DateField extends Field
 
         $widget .= "</select>";
 
-        $widget .= "<select id='".$this->name."' name='".$this->name."['month']' ";
+        $widget .= "<select id=\"".$this->name."[month]\" name=\"".$this->name."[month]\" ";
 
         if (!empty($this->classCss)) {
             $widget .= "class='".$this->classCss."' ";
@@ -59,7 +59,7 @@ class DateField extends Field
 
         $widget .= "</select>";
 
-        $widget .= "<select id='".$this->name."' name='".$this->name."['year']' ";
+        $widget .= "<select id=\"".$this->name."[year]\" name=\"".$this->name."[year]\" ";
 
         if (!empty($this->classCss)) {
             $widget .= "class='".$this->classCss."' ";

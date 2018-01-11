@@ -16,7 +16,7 @@ class Request
 
     public function getData(string $key)
     {
-        return isset($_GET[$key])? $GET[$key] : null;
+        return isset($_GET[$key])? $_GET[$key] : null;
     }
 
     public function getExists(string $key): bool
@@ -26,7 +26,7 @@ class Request
 
     public function postData(string $key)
     {
-        return isset($_POST[$key])? $POST[$key] : null;
+        return isset($_POST[$key])? $_POST[$key] : null;
     }
 
     public function postExists(string $key): bool

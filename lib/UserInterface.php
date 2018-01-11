@@ -7,13 +7,13 @@ interface UserInterface extends \Serializable
     public function getId(): int;
     public function setId(int $id);
 
-    public function getLogin(): string;
+    public function getLogin();
     public function setLogin(string $login);
 
-    public function getEmail(): string;
+    public function getEmail();
     public function setEmail(string $email);
 
-    public function getPassword(): string;
+    public function getPassword();
     public function setPassword(string $password);
 
     public function getSalt(): string;
@@ -27,4 +27,7 @@ interface UserInterface extends \Serializable
 
     public function getConfirmationToken(): string;
     public function setConfirmationToken(string $confirmationToken);
+
+    public function getPlainPassword();
+    public function setPlainPassword(array $plainPassword);
 }

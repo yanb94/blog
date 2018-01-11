@@ -19,6 +19,9 @@ class Member extends Entity implements UserInterface
     protected $confirmationToken;
     protected $birthDate;
 
+    protected $plainPassword;
+    protected $plainBirthDate;
+
 
     public function __construct(array $data = [])
     {
@@ -50,7 +53,7 @@ class Member extends Entity implements UserInterface
         $this->hydrate($data);
     }
 
-    public function getLogin(): string
+    public function getLogin()
     {
         return $this->login;
     }
@@ -60,7 +63,7 @@ class Member extends Entity implements UserInterface
         $this->login = $login;
     }
 
-    public function getFirstname(): string
+    public function getFirstname()
     {
         return $this->firstname;
     }
@@ -70,7 +73,7 @@ class Member extends Entity implements UserInterface
         $this->firstname = $firstname;
     }
 
-    public function getLastname(): string
+    public function getLastname()
     {
         return $this->lastname;
     }
@@ -80,7 +83,7 @@ class Member extends Entity implements UserInterface
         $this->lastname = $lastname;
     }
 
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -90,7 +93,7 @@ class Member extends Entity implements UserInterface
         $this->email = $email;
     }
 
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
@@ -154,7 +157,7 @@ class Member extends Entity implements UserInterface
         $this->birthDate = $date;
     }
 
-    public function getCivilite(): string
+    public function getCivilite()
     {
         return $this->civilite;
     }
@@ -162,5 +165,34 @@ class Member extends Entity implements UserInterface
     public function setCivilite(string $civilite)
     {
         $this->civilite = $civilite;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(array $plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        if ($this->plainPassword['first'] == $this->plainPassword['second']) {
+            $this->setPassword($this->plainPassword['second']);
+        }
+    }
+
+    public function getPlainBirthDate()
+    {
+        return $this->plainBirthDate;
+    }
+
+    public function setPlainBirthDate(array $plainBirthDate)
+    {
+        $this->plainBirthDate = $plainBirthDate;
+
+        if (isset($plainBirthDate['month']) and isset($plainBirthDate['day']) and isset($plainBirthDate['year'])) {
+            $date = new \DateTime($plainBirthDate['month'].'/'.$plainBirthDate['day'].'/'.$plainBirthDate['year']);
+            $this->setBirthDate($date);
+        }
     }
 }

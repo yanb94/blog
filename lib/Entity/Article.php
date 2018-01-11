@@ -2,6 +2,8 @@
 
 namespace Framework\Entity;
 
+use Framework\Entity;
+
 class Article extends Entity
 {
     protected $titre;
@@ -12,7 +14,7 @@ class Article extends Entity
 
     protected $authorName;
 
-    public function getTitre(): string
+    public function getTitre()
     {
         return $this->titre;
     }
@@ -22,7 +24,7 @@ class Article extends Entity
         $this->titre = $titre;
     }
 
-    public function getChapo(): string
+    public function getChapo()
     {
         return $this->chapo;
     }
@@ -32,7 +34,7 @@ class Article extends Entity
         $this->chapo = $chapo;
     }
 
-    public function getContenu(): string
+    public function getContenu()
     {
         return $this->contenu;
     }
@@ -42,12 +44,12 @@ class Article extends Entity
         $this->contenu = $contenu;
     }
 
-    public function getAuthor(): string
+    public function getAuthor()
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author)
+    public function setAuthor(int $author)
     {
         $this->author = $author;
     }

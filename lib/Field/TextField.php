@@ -9,7 +9,7 @@ class TextField extends Field
     protected $cols;
     protected $rows;
 
-    public function buildWidget()
+    public function buildWidget():string
     {
         $widget = "";
 
