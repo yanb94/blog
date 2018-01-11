@@ -4,5 +4,6 @@ parameters:
     tasks: 
       phplint: ~
       securitychecker: ~
-      phpcs: ~
+      phpcs:
+        standard: PSR1,PSR2
       xmllint: ~

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<routes>
+		<route name="home" controller="Public" action="home" url="/">
+		</route>
+		<route name="listBlog" controller="Public" action="listBlog" url="/listBlog">
+		</route>
+		<route name="articleOne" controller="Public" action="articleOne" url="/article-{id}">
+			<param name="id" requirement="\d"/>
+		</route>
+		<route name="addComment" controller="Public" action="addComment" url="/addComment-{id}" role="ROLE_USER">
+			<param name="id" requirement="\d"/>
+		</route>
+		<route name="login" controller="User" action="login" url="/login">
+		</route>
+		<route name="disconnect" controller="User" action="disconnect" url="/disconnect">
+		</route>
+		<route name="register" controller="User" action="register" url="/register">
+		</route>
+		<route name="confirmRegister" controller="User" action="confirmRegister" url="/confirmRegister">
+		</route>
+		<route name="validateRegister" controller="User" action="validateRegister" url="/validateRegister">
+		</route>
+	</routes>
+</config>

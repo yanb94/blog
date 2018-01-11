@@ -2,9 +2,6 @@
 
 namespace Framework;
 
-session_start();
-session_regenerate_id();
-
 class User extends AppComponent
 {
     public function getAttribute(string $attr): bool
@@ -54,18 +51,20 @@ class User extends AppComponent
 
     public function isGranted(string $myRole)
     {
-        if ($myRole == $_SESSION['role']) {
-            return true;
-        } else {
-            $listRole = $this->app->getConfig()->role_hierarchy->role;
+        if (isset($_SESSION['role'])) {
+            if ($myRole == $_SESSION['role']) {
+                return true;
+            } else {
+                $listRole = $this->app->getConfig()->role_hierarchy->role;
 
-            foreach ($listRole as $role) {
-                if ($role['name'] == $_SESSION['role']) {
-                    $listRoleChild = $role->role_child;
+                foreach ($listRole as $role) {
+                    if ($role['name'] == $_SESSION['role']) {
+                        $listRoleChild = $role->role_child;
 
-                    foreach ($listRoleChild as $roleChild) {
-                        if ($roleChild['name'] == $myRole) {
-                            return true;
+                        foreach ($listRoleChild as $roleChild) {
+                            if ($roleChild['name'] == $myRole) {
+                                return true;
+                            }
                         }
                     }
                 }
