@@ -25,7 +25,7 @@ class ArticleManager extends Manager
         $req->bindValue(':titre', $article->getTitre());
         $req->bindValue(':chapo', $article->getChapo());
         $req->bindValue(':contenu', $article->getContenu());
-        $req->bindValue(':author', $article->getAuthor());
+        $req->bindValue(':author', $article->getAuthor(), \PDO::PARAM_INT);
         $req->bindValue(':updatedAt', $dateNow);
 
         $req->execute();
@@ -33,27 +33,22 @@ class ArticleManager extends Manager
         $article->setId($this->dao->lastInsertId());
     }
 
-    public function get(int $id): Article
+    public function get(int $id)
     {
         $req = $this->dao->prepare("
             SELECT
-                id,
-                titre,
-                chapo,
-                contenu, 
-                author,
-                updatedAt,
+                article.id,
+                article.titre,
+                article.chapo,
+                article.contenu, 
+                article.author,
+                article.updatedAt,
                 member.login AS authorName
-            FROM 
-                article 
-            WHERE 
-                id = :id 
-            LEFT JOIN 
-                member 
-                ON 
-                    article.author = member.id");
+            FROM article 
+            LEFT JOIN member ON article.author = member.id
+            WHERE article.id = :id ");
 
-        $req->bindValue(':id', $id);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
 
         $req->execute();
 
@@ -71,7 +66,7 @@ class ArticleManager extends Manager
                 id = :id
             ");
 
-        $req->bindValue(':id', $id);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
 
         $req->execute();
     }
@@ -87,7 +82,6 @@ class ArticleManager extends Manager
                 titre = :titre,
                 chapo = :chapo,
                 contenu = :contenu,
-                author = :author,
                 updatedAt = :updatedAt
             WHERE 
                 id = :id
@@ -97,7 +91,6 @@ class ArticleManager extends Manager
         $req->bindValue(':titre', $article->getTitre());
         $req->bindValue(':chapo', $article->getChapo());
         $req->bindValue(':contenu', $article->getContenu());
-        $req->bindValue(':author', $article->getAuthor());
         $req->bindValue(':updatedAt', $dateNow);
 
         $req->execute();
@@ -109,22 +102,22 @@ class ArticleManager extends Manager
 
         $req = $this->dao->prepare("
             SELECT 
-                id,
-                titre,
-                chapo,
-                contenu,
-                author,
-                updatedAt,
+                article.id,
+                article.titre,
+                article.chapo,
+                article.contenu,
+                article.author,
+                article.updatedAt,
                 member.login AS authorName
             FROM article
             LEFT JOIN 
                 member
-                ON 
-                    article.author = member.id
-            LIMIT :start, :pagination");
+                ON article.author = member.id
+            ORDER BY article.updatedAt DESC
+            LIMIT :start, :pagination ");
 
-        $req->bindValue(':start', $start);
-        $req->bindValue(':pagination', $pagination);
+        $req->bindValue(':start', (int)$start, \PDO::PARAM_INT);
+        $req->bindValue(':pagination', (int)$pagination, \PDO::PARAM_INT);
 
         $req->execute();
 

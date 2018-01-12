@@ -95,7 +95,7 @@ abstract class Field
 
     public function setClassCss(string $class)
     {
-        $this->class = $class;
+        $this->classCss = $class;
     }
 
     public function getErrorMessage()

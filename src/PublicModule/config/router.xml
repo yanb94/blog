@@ -3,13 +3,13 @@
 	<routes>
 		<route name="home" controller="Public" action="home" url="/">
 		</route>
-		<route name="listBlog" controller="Public" action="listBlog" url="/listBlog">
+		<route name="listBlog" controller="Public" action="listBlog" url="/listBlog-{page}">
+			<param name="page" default="1" requirement="\d+"/>
 		</route>
 		<route name="articleOne" controller="Public" action="articleOne" url="/article-{id}">
-			<param name="id" requirement="\d"/>
+			<param name="id" requirement="\d+"/>
 		</route>
-		<route name="addComment" controller="Public" action="addComment" url="/addComment-{id}" role="ROLE_USER">
-			<param name="id" requirement="\d"/>
+		<route name="contactMe" controller="Public" action="contactMe" url="/contactMe">
 		</route>
 		<route name="login" controller="User" action="login" url="/login">
 		</route>

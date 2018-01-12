@@ -1,0 +1,52 @@
+<div class="center">
+	
+	
+	{% set controlA = page - 3 %}
+	{% set controlB = page + 3 %}
+	
+	{% if controlA < 1 %}
+	
+		{% set controlA = 1 %}
+	
+	{% endif %}
+	
+	{% if controlB > nbPage %}
+	
+	{% set controlB = nbPage %}
+	
+	{% endif %}
+
+	{% if controlB < 1 %}
+	
+	{% set controlB = 1 %}
+	
+	{% endif %}
+	
+
+<ul class="pagination">
+	{% for i in controlA..controlB %}
+	
+		{% if loop.first and controlA != 1 %}
+		<li><a href="{% block first %}{% endblock %}" > << </a></li>		
+		{% endif %}
+
+		{% if i == page %}
+		
+		<li class="active" ><a {# href="{% block select %}{% endblock %}" #} >{{i}}</a></li>
+		{% else %}
+		
+		<li><a href="{% block noselect %}{% endblock %}" >{{i}}</a></li>
+		
+		{% endif %}
+		
+		{% if loop.last and controlB < nbPage %}
+		
+		<li><a href="{% block end %}{% endblock %}" > >> </a></li>
+		
+		{% endif %}
+		
+	
+	{% endfor %}
+</ul>
+
+</div>
