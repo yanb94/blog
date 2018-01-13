@@ -5,6 +5,9 @@ use Framework\Request;
 use Framework\User;
 use Framework\Config;
 use Framework\Router;
+use Framework\ErrorController;
+use Framework\Exception\AccessDeniedException;
+use Framework\Exception\PageNotFoundException;
 
 class App
 {
@@ -57,6 +60,10 @@ class App
             } else {
                 (new $controller($this))->$action()->send();
             }
+        } catch (AccessDeniedException $e) {
+            (new ErrorController($this))->error403()->send();
+        } catch (PageNotFoundException $e) {
+            (new ErrorController($this))->error404()->send();
         } catch (\Exception $e) {
             die($e->getMessage());
         }

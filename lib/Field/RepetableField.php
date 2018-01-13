@@ -39,7 +39,9 @@ class RepetableField extends Field
                     $br = "</br>";
                 }
 
-                $field->setErrorMessage($msgInitial." ".$br.$this->errorMessage);
+                if (!empty($this->errorMessage)) {
+                    $field->setErrorMessage($msgInitial." ".$br.$this->errorMessage);
+                }
             }
 
             $fieldName = $field->getName();

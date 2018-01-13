@@ -9,7 +9,7 @@ class MemberManager extends Manager
 {
     public function add(Member $member)
     {
-        $password = cryptPassword($member);
+        $password = $this->cryptPassword($member);
 
         $req = $this->dao->prepare('
             INSERT INTO
@@ -31,14 +31,14 @@ class MemberManager extends Manager
         $req->bindValue(':login', $member->getLogin());
         $req->bindValue(':firstname', $member->getFirstname());
         $req->bindValue(':lastname', $member->getLastname());
-        $req->bindValue(':civilite', $member->getLogin());
+        $req->bindValue(':civilite', $member->getCivilite());
         $req->bindValue(':email', $member->getEmail());
         $req->bindValue(':password', $password);
         $req->bindValue(':salt', $member->getSalt());
         $req->bindValue(':role', $member->getRole());
         $req->bindValue(':valid', $member->getValid());
         $req->bindValue(':confirmationToken', $member->getConfirmationToken());
-        $req->bindValue(':birthDate', $member->getBirthDate());
+        $req->bindValue(':birthDate', $member->getBirthDateString());
 
         $req->execute();
 
@@ -81,18 +81,18 @@ class MemberManager extends Manager
         $req->bindValue(':login', $member->getLogin());
         $req->bindValue(':firstname', $member->getFirstname());
         $req->bindValue(':lastname', $member->getLastname());
-        $req->bindValue(':civilite', $member->getLogin());
+        $req->bindValue(':civilite', $member->getCivilite());
         $req->bindValue(':email', $member->getEmail());
         $req->bindValue(':role', $member->getRole());
         $req->bindValue(':valid', $member->getValid());
-        $req->bindValue(':birthDate', $member->getBirthDate());
+        $req->bindValue(':birthDate', $member->getBirthDateString());
 
         $req->execute();
     }
 
     public function editPassword(Member $member)
     {
-        $password = cryptPassword($member);
+        $password = $this->cryptPassword($member);
 
         $req = $this->dao->prepare('
             UPDATE 
@@ -153,6 +153,21 @@ class MemberManager extends Manager
         $req = $this->dao->prepare($this->genericSelect()." WHERE login = :login");
 
         $req->bindValue(':login', $login, \PDO::PARAM_INT);
+
+        $req->execute();
+
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Member::class);
+
+        return $req->fetch();
+    }
+
+    public function getByConfirmToken(string $confirmToken, bool $valid)
+    {
+        $req = $this->dao->prepare($this->genericSelect()." WHERE confirmationToken = :confirmationToken
+         AND valid = :valid");
+
+        $req->bindValue(':confirmationToken', $confirmToken);
+        $req->bindValue(':valid', $valid, \PDO::PARAM_BOOL);
 
         $req->execute();
 

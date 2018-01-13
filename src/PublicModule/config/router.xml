@@ -13,13 +13,16 @@
 		</route>
 		<route name="login" controller="User" action="login" url="/login">
 		</route>
-		<route name="disconnect" controller="User" action="disconnect" url="/disconnect">
+		<route name="disconnect" controller="User" role="ROLE_USER" action="disconnect" url="/disconnect">
 		</route>
 		<route name="register" controller="User" action="register" url="/register">
 		</route>
 		<route name="confirmRegister" controller="User" action="confirmRegister" url="/confirmRegister">
 		</route>
-		<route name="validateRegister" controller="User" action="validateRegister" url="/validateRegister">
+		<route name="validateRegister" controller="User" action="validateRegister" url="/validateRegister-{confirmToken}">
+			<param name="confirmToken" requirement=""/>
+		</route>
+		<route name="myProfile" role="ROLE_USER" controller="User" action="myProfile" url="/myProfile">
 		</route>
 	</routes>
 </config>
