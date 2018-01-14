@@ -1,0 +1,192 @@
+{% extends '@core/layout.html.twig' %}
+
+{% block title %}
+    Espace d'administration
+{% endblock %}
+
+{% block body %}
+    <section id="list-article">
+    	<div class="container">
+    		<div class="row my-title-admin-home">
+    			<div class="col-xs-10">
+    				<h2>Listes des articles</h2> 
+    			</div>
+    			<div class="col-xs-2">
+    				<a href="{{url.generateUrl('addBlog')}}" class="btn btn-primary pull-right">Ajouter un article</a>
+    			</div>
+    		</div>
+    		<div class="row">
+    			{% if user.hasFlash %}
+					{% if user.hasFlashArray('blog_error')%}
+						<div class="alert alert-danger">
+							{{user.getFlash().blog_error}}
+						</div>
+					{% endif %}
+					{% if user.hasFlashArray('blog_success')%}
+						<div class="alert alert-success">
+							{{user.getFlash().blog_success}}
+						</div>
+					{% endif %}
+    			{% endif %}
+    			{% for article in articles %}
+    			    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    			    	<div class="my-item-article-list">
+	    			    	<div class="row my-no-margin">
+	    			    		<div class="col-xs-12">
+			    			    	<h3 class="text-center my-item-article-list-title">
+			    			    		<a href="{{url.generateUrl('articleOne',{'id':article.id})}}">
+			    			    			{{article.titre}}
+			    			    		</a>
+			    			    	</h3>
+		    			    	</div>
+		    			    	<div class="col-xs-12 text-justify my-article-preview-cont-admin">
+		    			    		<p class="small">
+		    			    			{{article.chapo}}
+		    			    		</p>
+		    			    	</div>
+	    			    	</div>
+	    			    	<div class="row text-center my-no-margin">
+	    			    		<div class="col-xs-6 my-no-padding">
+	    			    			<a class="btn btn-success my-full-width my-no-radius" href="{{url.generateUrl('editBlog',{'id': article.id})}}">
+	    			    				Modifier
+	    			    			</a>
+	    			    		</div>
+	    			    		<div class="col-xs-6 my-no-padding">
+	    			    			<a class="btn btn-primary my-full-width my-no-radius" href="{{url.generateUrl('removeBlog',{'id': article.id})}}">
+	    			    				Supprimer
+	    			    			</a>
+	    			    		</div>
+    			    		</div>
+    			    	</div>
+    			    </div>
+    			{% endfor %}
+    		</div>
+  		</div>
+  	</section>
+  	<hr class="star-primary">
+  	<section id="list-comment"> 
+  		<div class="container"> 
+    		<div class="row my-title-admin-home">
+    			<div class="col-xs-12">
+    				<h2>Commentaire à valider</h2>
+    			</div>
+    		</div>
+    		<div class="row">
+    			{% if user.hasFlash %}
+					{% if user.hasFlashArray('comment_error')%}
+						<div class="alert alert-danger">
+							{{user.getFlash().comment_error}}
+						</div>
+					{% endif %}
+					{% if user.hasFlashArray('comment_success')%}
+						<div class="alert alert-success">
+							{{user.getFlash().comment_success}}
+						</div>
+					{% endif %}
+    			{% endif %}
+				{% for comment in comments %}
+				    <div class="my-comment admin col-xs-12 my-no-padding">
+				    	<div class="col-xs-12 my-comment-cont">
+				    		<p>
+				    			{{comment.contenu}}
+				    		</p>
+				    	</div>
+				    	<div class="col-xs-12 my-comment-detail">
+					    	<div class="col-xs-6" >
+					    		De {{comment.authorName}}
+					    	</div>
+					    	<div class="col-xs-6 text-right">
+					    		Le
+					    		{{comment.updatedAt|date('j')}}
+					    		{{comment.updatedAt|date('n')|frenchMonth}}
+					    		{{comment.updatedAt|date('Y ')}}
+					    		à
+					    		{{comment.updatedAt|date(' G:i')}}
+					    	</div>
+				    	</div>
+				    </div>
+				    <div class="col-xs-12 my-no-padding my-comment-admin-button-group">
+				    	<div class="col-xs-6 my-no-padding">
+				    		<a href="{{url.generateUrl('validateComment',{id: comment.id})}}" class="btn btn-success my-full-width my-comment-button-validate">
+				    			Valider
+				    		</a>
+				    	</div>
+				    	<div class="col-xs-6 my-no-padding">
+				    		<a href="{{url.generateUrl('deleteComment',{id: comment.id})}}" class="btn btn-primary my-full-width my-comment-button-remove">
+				    			Supprimer
+				    		</a>
+				    	</div>
+				    </div>
+				{% endfor %}
+    		</div>
+    	</div>
+    </section>
+    <hr class="star-primary">
+    <section id="list-member">
+    	<div class="container">
+    		<div class="row my-title-admin-home">
+    			<div class="col-xs-12">
+    				<h2>Listes des utilisateurs</h2>
+    			</div>
+    		</div>
+    		<div class="row">
+    			{% if user.hasFlash %}
+					{% if user.hasFlashArray('member_error')%}
+						<div class="alert alert-danger">
+							{{user.getFlash().member_error}}
+						</div>
+					{% endif %}
+					{% if user.hasFlashArray('member_success')%}
+						<div class="alert alert-success">
+							{{user.getFlash().member_success}}
+						</div>
+					{% endif %}
+    			{% endif %}
+    			{% for member in members %}
+    			    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="my-item-member-list">
+							<div class="row my-no-margin">
+								<div class="col-xs-12">
+									<h3 class="text-center">
+										{{member.login}}
+									</h3>
+								</div>
+								<div class="col-xs-12">
+									<p class="text-center small">
+										{{member.civilite|sexe}} {{member.lastname|upper}} {{member.firstname}}
+									</p>
+									<p class="text-center">
+										{{member.email}}
+									</p>
+									<p class="text-center">
+										{{member.birthDate|age}} ans
+									</p>
+									<p class="text-center">
+										Statut : {{member.role|role}}
+									</p>
+								</div>
+							</div>
+							<div class="row my-no-margin">
+								<div class="col-xs-12 my-no-padding">
+									{% if member.role != 'ROLE_ADMIN' %}
+										<div class="col-xs-12 my-no-padding">
+											<a href="{{url.generateUrl('giveMemberAdmin',{id: member.id})}}" class="btn btn-success my-no-radius my-full-width">
+												Donner les droits administrateurs
+											</a>
+										</div>
+									{% else %}
+										<div class="col-xs-12 my-no-padding">
+											<a href="{{url.generateUrl('removeMemberAdmin',{id: member.id})}}" class="btn btn-primary my-no-radius my-full-width">
+												Retirer les droits administrateurs
+											</a>
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+    			    </div>
+    			{% endfor %}
+    		</div>
+    	</div>
+    </section>
+{% endblock %}

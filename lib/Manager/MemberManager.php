@@ -139,7 +139,7 @@ class MemberManager extends Manager
     {
         $req = $this->dao->prepare($this->genericSelect()." WHERE valid = :valid");
 
-        $req->bindValue(':role', $valid);
+        $req->bindValue(':valid', $valid);
 
         $req->execute();
 

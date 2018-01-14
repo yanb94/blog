@@ -61,7 +61,26 @@ abstract class Controller extends AppComponent
                 );
 
                 return $month[(int)$month];
-            });
+            })
+            ->addFilter('age', function ($date) {
+                $age = date('Y') - date('Y', strtotime($date));
+                if (date('md') < date('md', strtotime($date))) {
+                    return $age - 1;
+                }
+                return $age;
+            })
+            ->addFilter('role', function ($role) {
+                $listRole = [
+                    "ROLE_USER" => "Membre",
+                    "ROLE_ADMIN"=> "Administrateur"];
+
+                if (isset($listRole[$role])) {
+                    return $listRole[$role];
+                } else {
+                    return false;
+                }
+            })
+            ;
     }
 
     public function render(string $template, array $params = [])

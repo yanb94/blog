@@ -13,11 +13,11 @@
 					<p class="small">{{article.chapo}}</p>
 				</div>
 				<div class="col-xs-12 text-justify">
-					<p>{{article.contenu}}</p>
+					<p>{{article.contenu|nl2br}}</p>
 				</div>
 				<div class="col-xs-6">
 					<span class="align-left">
-			    		Le
+			    		Modifié le
 			    		{{article.updatedAt|date('j')}}
 			    		{{article.updatedAt|date('n')|frenchMonth}}
 			    		{{article.updatedAt|date('Y ')}}
