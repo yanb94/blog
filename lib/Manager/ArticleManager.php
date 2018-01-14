@@ -115,7 +115,7 @@ class ArticleManager extends Manager
             LEFT JOIN 
                 member
                 ON article.author = member.id
-            ORDER BY article.updatedAt DESC
+            ORDER BY article.id DESC
             LIMIT :start, :pagination ");
 
         $req->bindValue(':start', (int)$start, \PDO::PARAM_INT);
@@ -143,7 +143,7 @@ class ArticleManager extends Manager
             LEFT JOIN 
                 member
                 ON article.author = member.id
-            ORDER BY article.updatedAt DESC");
+            ORDER BY article.id DESC");
 
         $req->execute();
 
