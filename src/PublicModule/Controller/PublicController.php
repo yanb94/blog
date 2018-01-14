@@ -41,9 +41,9 @@ class PublicController extends Controller
 
 
         if ($user->isGranted('ROLE_USER')
-            and $request->method() == 'POST'
-            and $request->postExists(CommentFormBuilder::NAME_FORM)
-            and $request->postData(CommentFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
+            && $request->method() == 'POST'
+            && $request->postExists(CommentFormBuilder::NAME_FORM)
+            && $request->postData(CommentFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $comment = new Comment($request->postData(CommentFormBuilder::NAME_FORM));
             $comment->setArticle($params['id']);
             $comment->setAuthor($user->getMember()->getId());

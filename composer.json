@@ -1,4 +1,7 @@
 {
+    "name": "yanb94/blog",
+    "description": "This a project of personal blog",
+    "license": "MIT",
     "require-dev": {
         "phpro/grumphp": "^0.12.1",
         "jakub-onderka/php-parallel-lint": "^0.9.2",

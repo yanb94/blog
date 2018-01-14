@@ -7,3 +7,4 @@ parameters:
       phpcs:
         standard: PSR1,PSR2
       xmllint: ~
+      composer: ~

@@ -66,7 +66,7 @@ class Router extends AppComponent
     {
         foreach ($this->routes as $route) {
             if ($route->match($url)) {
-                if ($route->getRightAccess() == null or $this->app->getUser()->isGranted($route->getRightAccess())) {
+                if (is_null($route->getRightAccess()) || $this->app->getUser()->isGranted($route->getRightAccess())) {
                     return $route;
                 } else {
                     throw new AccessDeniedException("Access denied", 403);
