@@ -37,18 +37,17 @@ class CommentManager extends Manager
     {
         $req = $this->dao->prepare("
             SELECT 
-                id,
-                contenu,
-                createdAt,
-                author,
-                article,
-                validate, 
+                comment.id,
+                comment.contenu,
+                comment.createdAt,
+                comment.author,
+                comment.article,
+                comment.validate, 
                 member.login AS authorName,
                 article.titre AS articleName
             FROM 
                 comment
-            WHERE 
-                id = :id
+
             LEFT JOIN 
                 member 
                 ON 
@@ -56,7 +55,10 @@ class CommentManager extends Manager
             LEFT JOIN 
                 article 
                 ON 
-                    comment.article = article.id");
+                    comment.article = article.id
+            WHERE 
+                comment.id = :id
+                    ");
 
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
 
@@ -108,17 +110,15 @@ class CommentManager extends Manager
     {
         $req = $this->dao->prepare("
             SELECT 
-                id,
-                contenu,
-                createdAt,
-                author,
-                article,
+                comment.id,
+                comment.contenu,
+                comment.createdAt,
+                comment.author,
+                comment.article,
                 member.login AS authorName,
                 article.titre AS articleName 
             FROM 
                 comment
-            WHERE 
-                validate = :validate
             LEFT JOIN 
                 member 
                 ON 
@@ -126,9 +126,11 @@ class CommentManager extends Manager
             LEFT JOIN 
                 article 
                 ON
-                    comment.article = article.id");
+                    comment.article = article.id
+            WHERE 
+                comment.validate = :validate
+                ");
 
-        $req->bindValue(':article', $articleId, \PDO::PARAM_INT);
         $req->bindValue(':validate', false, \PDO::PARAM_BOOL);
 
         $req->execute();
@@ -146,7 +148,7 @@ class CommentManager extends Manager
             WHERE 
                 id = :id
             ");
-        $red->bindValue(':id', $comment->getId());
+        $req->bindValue(':id', $id);
 
         $req->execute();
     }
@@ -170,8 +172,8 @@ class CommentManager extends Manager
         $req->bindValue(':createdAt', $comment->getCreatedAt());
         $req->bindValue(':author', $comment->getAuthor(), \PDO::PARAM_INT);
         $req->bindValue(':article', $comment->getArticle(), \PDO::PARAM_INT);
-        $red->bindValue(':validate', $comment->getValidate(), \PDO::PARAM_BOOL);
-        $red->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
+        $req->bindValue(':validate', $comment->getValidate(), \PDO::PARAM_BOOL);
+        $req->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
 
         $req->execute();
     }

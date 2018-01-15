@@ -6,16 +6,22 @@
 		<route name="addBlog" controller="Admin" action="addBlog" url="/addBlog">
 		</route>
 		<route name="editBlog" controller="Admin" action="editBlog" url="/editBlog-{id}">
-			<param name="id" requirement="\d"/>
+			<param name="id" requirement="\d+"/>
 		</route>
 		<route name="removeBlog" controller="Admin" action="removeBlog" url="/removeBlog-{id}">
-			<param name="id" requirement="\d"/>
+			<param name="id" requirement="\d+"/>
 		</route>
 		<route name="validateComment" controller="Admin" action="validateComment" url="/validateComment-{id}">
-			<param name="id" requirement="\d"/>
+			<param name="id" requirement="\d+"/>
 		</route>
 		<route name="deleteComment" controller="Admin" action="deleteComment" url="/deleteComment-{id}">
-			<param name="id" requirement="\d"/>
+			<param name="id" requirement="\d+"/>
+		</route>
+		<route name="giveMemberAdmin" controller="Admin" action="giveMemberAdmin" url="/giveMemberAdmin-{id}">
+			<param name="id" requirement="\d+"/>
+		</route>
+		<route name="removeMemberAdmin" controller="Admin" action="removeMemberAdmin" url="/removeMemberAdmin-{id}">
+			<param name="id" requirement="\d+"/>
 		</route>
 	</routes>
 </config>
