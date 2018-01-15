@@ -19,9 +19,9 @@ use Framework\Validator\SameValueValidator;
 use Framework\Validator\DateValidator;
 use Framework\Validator\BirthDateValidator;
 
-class MemberFormBuilder extends FormBuilder
+class EditMemberFormBuilder extends FormBuilder
 {
-    const NAME_FORM = 'form_member';
+    const NAME_FORM = 'form_edit_member';
 
     public function build()
     {
@@ -82,36 +82,6 @@ class MemberFormBuilder extends FormBuilder
                     new NotNullValidator("Vous devez indiquer votre email"),
                     new EmailValidator("Vous devez entrez un email correct"),
                     new MaxLengthValidator("Votre email ne doit pas comporter plus de 255 caractères", 255)
-                ]
-            ]))
-            ->add(new RepetableField([
-                "name" => "plainPassword",
-                "fields" => [
-                    new PasswordField([
-                        "name" => "first",
-                        "label" => "Mot de passe",
-                        "classCss" => "form-control",
-                        "maxLength" => 50,
-                        "minLength" => 8,
-                        "validators" => [
-                            new NotNullValidator("Vous devez indiquer un mot de passe"),
-                            new MaxLengthValidator("Votre mot de passe ne doit pas avoir plus de 50 caractères", 50),
-                            new MinLengthValidator("Votre mot de passe doit comporter au moins 8 caractères", 8)
-                        ]
-                    ]),
-                    new PasswordField([
-                        "name"=> "second",
-                        "label" => "Confirmer votre mot de passe",
-                        "classCss" => "form-control",
-                        "maxLength" => 50,
-                        "minLength" => 8,
-                        "validators" => [
-                            new NotNullValidator("Vous devez confirmer votre mot de passe"),
-                        ]
-                    ])
-                ],
-                "validators" => [
-                    new SameValueValidator("Vos mot de passe doivent être identique")
                 ]
             ]))
             ->add(new DateField([

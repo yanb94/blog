@@ -14,7 +14,7 @@ class Member extends Entity implements UserInterface
     protected $email;
     protected $password;
     protected $salt;
-    protected $role;
+    protected $role = 'ROLE_USER';
     protected $valid = false;
     protected $confirmationToken;
     protected $birthDate;
@@ -152,9 +152,22 @@ class Member extends Entity implements UserInterface
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTime $date)
+    public function getBirthDateString()
     {
-        $this->birthDate = $date;
+        if (is_string($this->birthDate)) {
+            return $this->birthDate;
+        } elseif ($this->birthDate != null) {
+            return $this->birthDate->format('Y-m-d');
+        }
+    }
+
+    public function setBirthDate($date)
+    {
+        if (is_string($date)) {
+            $this->birthDate = new \DateTime($date);
+        } elseif ($date instanceof \DateTime) {
+            $this->birthDate = $date;
+        }
     }
 
     public function getCivilite()
@@ -183,7 +196,25 @@ class Member extends Entity implements UserInterface
 
     public function getPlainBirthDate()
     {
-        return $this->plainBirthDate;
+        if (is_null($this->plainBirthDate) and !is_null($this->birthDate) and $this->birthDate instanceof \DateTime) {
+            $array = [
+                "day"=>$this->birthDate->format('d'),
+                "month"=>$this->birthDate->format('m'),
+                "year"=>$this->birthDate->format('Y')
+            ];
+
+            return $array;
+        } elseif (is_null($this->plainBirthDate)and !is_null($this->birthDate) and is_string($this->birthDate)) {
+            $ar = explode('-', $this->birthDate);
+
+            $array['day'] = $ar[2];
+            $array['month'] = $ar[1];
+            $array['year'] = $ar[0];
+
+            return $array;
+        } else {
+            return $this->plainBirthDate;
+        }
     }
 
     public function setPlainBirthDate(array $plainBirthDate)

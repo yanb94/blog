@@ -11,6 +11,21 @@ class DateField extends Field
 
     public function buildWidget(): string
     {
+        $month = array(
+                     1 => 'Janvier',
+                     2 => 'Février',
+                     3 => 'Mars',
+                     4 => 'Avril',
+                     5 => 'Mai',
+                     6 => 'Juin',
+                     7 => 'Juillet',
+                     8 => 'Août',
+                     9=> 'Septembre',
+                    10=> 'Octobre',
+                    11 => 'Novembre',
+                    12 => 'Décembre'
+                );
+
         $widget = "";
 
         if (!empty($this->errorMessage)) {
@@ -19,7 +34,7 @@ class DateField extends Field
 
 
         if (!empty($this->label)) {
-            $widget .= "<label>".$this->label."</label>";
+            $widget .= "<label>".$this->label."</label></br>";
         }
 
 
@@ -51,9 +66,9 @@ class DateField extends Field
 
         for ($i=1; $i < 13; $i++) {
             if (!empty($this->value) and $this->value['month'] == $i) {
-                $widget .= "<option value='".$i."' selected >".$i."</option>";
+                $widget .= "<option value='".$i."' selected >".$month[$i]."</option>";
             } else {
-                $widget .= "<option value='".$i."' >".$i."</option>";
+                $widget .= "<option value='".$i."' >".$month[$i]."</option>";
             }
         }
 

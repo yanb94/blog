@@ -170,7 +170,11 @@ class Route
 
     public function addValidateVar(string $key, string $value): self
     {
-        $this->validateVars[$key] = "(".$value.")";
+        if ($value !=  "") {
+            $this->validateVars[$key] = "(".$value.")";
+        } else {
+            $this->validateVars[$key] = "(.*)";
+        }
 
         return $this;
     }

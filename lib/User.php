@@ -89,6 +89,11 @@ class User extends AppComponent
         return isset($_SESSION['flash']);
     }
 
+    public function hasFlashArray(string $key):bool
+    {
+        return isset($_SESSION['flash'][$key]);
+    }
+
     public function setFlash($value)
     {
         $_SESSION['flash'] = $value;
@@ -101,5 +106,12 @@ class User extends AppComponent
         }
 
         return $_SESSION['crsf_token'];
+    }
+
+    public function connect(UserInterface $member)
+    {
+        $this->setRole($member->getRole());
+        $this->setMember($member);
+        $this->setAuthenticated(true);
     }
 }

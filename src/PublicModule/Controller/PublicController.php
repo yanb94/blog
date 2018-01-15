@@ -46,8 +46,7 @@ class PublicController extends Controller
             and $request->postData(CommentFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $comment = new Comment($request->postData(CommentFormBuilder::NAME_FORM));
             $comment->setArticle($params['id']);
-            $comment->setAuthor(1);
-            // $comment->setAuthor($user->getMember()->getId());
+            $comment->setAuthor($user->getMember()->getId());
 
 
             $formBuilder = new CommentFormBuilder($comment, $user->getCrsfToken());
@@ -56,7 +55,6 @@ class PublicController extends Controller
             $form = $formBuilder->getForm();
 
             if ($form->isValid()) {
-                var_dump('ici');
                 $this->managers->getManagerOf('Comment')->add($comment);
                 
                 $url = $this->app->getRouter()->generateUrl('articleOne', ['id'=>$params['id']]);

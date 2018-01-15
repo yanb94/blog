@@ -62,11 +62,17 @@
                     </li>
                     {% if user.isGranted('ROLE_USER') %}
                         <li class="page-scroll">
-                            <a href="">Déconnexion</a>
+                            <a href="{{url.generateUrl('myProfile')}}">Mes infos</a>
+                        </li>                        
+                        <li class="page-scroll">
+                            <a href="{{url.generateUrl('disconnect')}}">Déconnexion</a>
                         </li>
                     {% else %}
                         <li class="page-scroll">
-                            <a href="">S'identifier</a>
+                            <a href="{{url.generateUrl('login')}}">S'identifier</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="{{url.generateUrl('register')}}">S'inscrire</a>
                         </li>                        
                     {% endif %}
                 </ul>
