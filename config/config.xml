@@ -13,4 +13,7 @@
 			<path name="core" value="/view"/>
 		</paths>
 	</twig>
+	<info_user>
+		<email value="yann-elias@wanadoo.fr"></email>
+	</info_user>
 </config>

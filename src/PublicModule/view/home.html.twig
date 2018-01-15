@@ -1,0 +1,83 @@
+{% extends '@core/layout.html.twig' %}
+
+{% block title %}Blog de Yann-Elias Bellagnech{% endblock %}
+
+{% block body %}
+
+    <section class="my-cv-section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center my-white">
+                    <h2>Mes Compétence</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 my-white text-justify">
+                    <p>Je suis un développeur PHP/Symfony capable de réaliser pour vous des sites web de grande qualité comme ce blog. Si vous souhaitez en savoir plus vous pouvez consultez mon cv c-dessous.</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="cv/cv.pdf" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Voir mon CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Me Contacter</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Nom</label>
+                                <input type="text" class="form-control" name="form_contact['lastname']" placeholder="Nom" id="lastname" required data-validation-required-message="Entrer votre Nom.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Prénom</label>
+                                <input type="text" class="form-control" name="form_contact['firstname']" placeholder="Prénom" id="firstname" required data-validation-required-message="Entrer votre Prénom.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Adresse Email</label>
+                                <input type="email" class="form-control" name="form_contact['email']" placeholder="Adresse Email" id="email" required data-validation-required-message="Entrez votre adresse email.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Message</label>
+                                <textarea rows="5" class="form-control" name="form_contact['message']" placeholder="Message" id="message" required data-validation-required-message="Entrez votre message."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <input id="crsf_token" name="form_contact['crsf_token']" type="hidden" value="{{user.getCrsfToken()}}"></input>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

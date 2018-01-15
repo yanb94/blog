@@ -10,7 +10,7 @@ class Comment extends Entity
     protected $createdAt;
     protected $author;
     protected $article;
-    protected $validate;
+    protected $validate = false;
 
     protected $authorName;
     protected $articleName;
@@ -60,7 +60,7 @@ class Comment extends Entity
         return $this->validate;
     }
 
-    public function setValidate(bool $validate)
+    public function setValidate(bool $validate = false)
     {
         $this->validate = $validate;
     }

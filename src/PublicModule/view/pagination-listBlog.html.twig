@@ -1,0 +1,17 @@
+{% extends "@public/pagination.html.twig" %}
+
+{% block first %}
+	{{ url.generateUrl('listBlog',{'page': 1}) }}
+{% endblock %}
+
+{% block select %}
+	{{ url.generateUrl('listBlog',{'page': i}) }}
+{% endblock %}
+
+{% block noselect %}
+	{{ url.generateUrl('listBlog',{'page': i}) }}
+{% endblock %}
+
+{% block end %}
+	{{ url.generateUrl('listBlog',{'page': nbPage}) }}
+{% endblock %}

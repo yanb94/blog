@@ -66,6 +66,10 @@ class Article extends Entity
 
     public function getUpdatedAt(): \DateTime
     {
+        if (is_string($this->updatedAt)) {
+            return new \DateTime($this->updatedAt);
+        }
+
         return $this->updatedAt;
     }
 

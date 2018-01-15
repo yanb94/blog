@@ -19,16 +19,16 @@ class TextField extends Field
 
 
         if (!empty($this->label)) {
-            $widget .= "<label for=".$this->name.">".$this->label."</label>";
+            $widget .= "<label for=".$this->name.">".$this->label."</label> ";
         }
 
         if (!empty($this->instruction)) {
-            $widget .= "<span>".$this->instruction."</span>";
+            $widget .= " <span>(".$this->instruction.")</span>";
         }
 
         $widget .= "<textarea ";
 
-        $widget .= "id=".$this->name." name=".$this->name;
+        $widget .= "id=".$this->name." name=".$this->name." ";
 
         if (!empty($this->rows)) {
             $widget .= "rows=".$this->rows." ";
