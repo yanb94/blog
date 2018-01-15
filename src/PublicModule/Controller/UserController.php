@@ -21,8 +21,8 @@ class UserController extends Controller
         $user = $this->getApp()->getUser();
 
         if ($request->method() == 'POST'
-            and $request->postExists(LoginMemberFormBuilder::NAME_FORM)
-            and $request->postData(LoginMemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
+            && $request->postExists(LoginMemberFormBuilder::NAME_FORM)
+            && $request->postData(LoginMemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $memberPost = new Member($request->postData(LoginMemberFormBuilder::NAME_FORM));
             $formBuilder = new LoginMemberFormBuilder($memberPost, $user->getCrsfToken());
             $formBuilder->build();
@@ -32,8 +32,8 @@ class UserController extends Controller
             if ($form->isValid()) {
                 $member = $this->managers->getManagerOf('Member')->getByLogin($memberPost->getLogin());
 
-                if ($member != null
-                    and crypt($memberPost->getPassword(), $member->getSalt()) == $member->getPassword()) {
+                if (!is_null($member)
+                    && crypt($memberPost->getPassword(), $member->getSalt()) == $member->getPassword()) {
                     $user->connect($member);
 
                     $url = $this->getApp()->getRouter()->generateUrl('home');
@@ -69,8 +69,8 @@ class UserController extends Controller
         $router =  $this->app->getRouter();
 
         if ($request->method() == 'POST'
-            and $request->postExists(MemberFormBuilder::NAME_FORM)
-            and $request->postData(MemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
+            && $request->postExists(MemberFormBuilder::NAME_FORM)
+            && $request->postData(MemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $member = new Member($request->postData(MemberFormBuilder::NAME_FORM));
 
             $formBuilder = new MemberFormBuilder($member, $user->getCrsfToken());
@@ -140,7 +140,7 @@ class UserController extends Controller
 
         $member = $this->managers->getManagerOf('Member')->getByConfirmToken($confirmToken, false);
 
-        if ($member != null) {
+        if (!is_null($member)) {
             $member->setValid(true);
             $member->setConfirmationToken('');
             $this->managers->getManagerOf('Member')->edit($member);
@@ -162,14 +162,14 @@ class UserController extends Controller
 
         $member = $this->managers->getManagerOf('Member')->get($memberSession->getId());
 
-        if ($member == null) {
+        if (is_null($member)) {
             $user->disconnect();
             throw new PageNotFoundException("Page not found", 404);
         }
 
         if ($request->method() == 'POST'
-            and $request->postExists(EditMemberFormBuilder::NAME_FORM)
-            and $request->postData(EditMemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
+            && $request->postExists(EditMemberFormBuilder::NAME_FORM)
+            && $request->postData(EditMemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $member->hydrate($request->postData(EditMemberFormBuilder::NAME_FORM));
 
             $formBuilder = new EditMemberFormBuilder($member, $user->getCrsfToken());
@@ -202,8 +202,8 @@ class UserController extends Controller
                 }
             }
         } elseif ($request->method() == 'POST'
-            and $request->postExists(ChangePasswordMemberFormBuilder::NAME_FORM)
-            and $request->postData(ChangePasswordMemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()
+            && $request->postExists(ChangePasswordMemberFormBuilder::NAME_FORM)
+            && $request->postData(ChangePasswordMemberFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()
         ) {
             $formBuilder = new EditMemberFormBuilder($member, $user->getCrsfToken());
             $formBuilder->build();

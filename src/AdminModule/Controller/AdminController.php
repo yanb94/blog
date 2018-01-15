@@ -32,8 +32,8 @@ class AdminController extends Controller
         $request = $this->getApp()->getRequest();
         
         if ($request->method() == 'POST'
-            and $request->postExists(ArticleFormBuilder::NAME_FORM)
-            and $request->postData(ArticleFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
+            && $request->postExists(ArticleFormBuilder::NAME_FORM)
+            && $request->postData(ArticleFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $article = new Article($request->postData(ArticleFormBuilder::NAME_FORM));
             $article->setAuthor($user->getMember()->getId());
             $formBuilder = new ArticleFormBuilder($article, $user->getCrsfToken());
@@ -70,8 +70,8 @@ class AdminController extends Controller
         $request = $this->getApp()->getRequest();
 
         if ($request->method() == 'POST'
-            and $request->postExists(EditArticleFormBuilder::NAME_FORM)
-            and $request->postData(EditArticleFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
+            && $request->postExists(EditArticleFormBuilder::NAME_FORM)
+            && $request->postData(EditArticleFormBuilder::NAME_FORM)['crsf_token'] == $user->getCrsfToken()) {
             $article->hydrate($request->postData(EditArticleFormBuilder::NAME_FORM));
 
             $formBuilder = new EditArticleFormBuilder($article, $user->getCrsfToken(), $members);

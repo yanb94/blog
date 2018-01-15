@@ -26,6 +26,5 @@ class RedirectResponse extends Response
     public function send()
     {
         $this->redirect($this->url);
-        exit;
     }
 }
