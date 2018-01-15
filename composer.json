@@ -10,5 +10,8 @@
     		"Framework\\": "lib/",
     		"Application\\": "src/"
     	}
+    },
+    "require": {
+        "twig/twig": "~2.0"
     }
 }
