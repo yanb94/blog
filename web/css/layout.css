@@ -20,6 +20,16 @@
 	padding: 0!important;
 }
 
+.my-no-radius
+{
+	border-radius: 0!important;
+}
+
+.my-no-margin
+{
+	margin: 0!important;
+}
+
 .my-article-preview
 {
 	margin-bottom: 5em;
@@ -28,6 +38,11 @@
 .my-article-preview-cont
 {
 	min-height: 220px;
+}
+
+.my-article-preview-cont-admin
+{
+	min-height: 160px;
 }
 
 .my-h2-title
@@ -43,6 +58,23 @@
     margin-bottom: 2em;
 }
 
+.my-comment.admin
+{
+	margin-bottom: 0px;
+	border-radius: 5px 5px 0px 0px; 
+}
+
+.my-comment-button-validate
+{
+	border-radius: 0px 0px 0px 5px;
+}
+
+.my-comment-button-remove
+{
+	border-radius: 0px 0px 5px 0px;
+	font-weight: bold;
+}
+
 .my-comment-cont
 {
 	padding-top:20px;
@@ -52,6 +84,13 @@
 .my-comment-detail
 {
 	border-top: 1px solid silver;
+}
+
+.my-comment-admin-button-group
+{
+	margin-bottom: 10px;
+	box-shadow: 1px 1px 1px silver;
+	border-radius: 0px 0px 5px 5px;
 }
 
 .my-date-field
@@ -72,6 +111,37 @@
 {
 	max-width:500px;
 	width:100%;
+}
+
+.my-item-article-list
+{
+	border: 1px solid silver;
+	margin-bottom: 10px;
+	box-shadow: 1px 1px 1px silver;
+}
+
+.my-item-member-list
+{
+	border: 1px solid silver;
+	margin-bottom: 10px;
+	box-shadow: 1px 1px 1px silver;
+}
+
+.my-item-article-list-title
+{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+}
+
+.my-full-width
+{
+	width: 100%;
+}
+
+.my-title-admin-home
+{
+	margin-bottom:25px;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,44 @@
+{% extends '@core/layout.html.twig' %}
+
+{% block title %}
+    Editer un article
+{% endblock %}
+
+{% block body %}
+    <section>
+    	<div class="container">
+    		<div class="row my-title-admin-home">
+    			<div class="col-xs-10">
+    				<h2>Editer un article</h2> 
+    			</div>
+    		</div>
+    	</div>
+    	<div class="container">
+    		<div class="row my-title-admin-home">
+    			<div class="col-xs-12">
+    				<form action="{{url.generateUrl('editBlog',{id: article.id})}}" method="post">
+					{% if user.hasFlash %}
+						{% if user.hasFlashArray('article_error')%}
+							<div class="alert alert-danger">
+								{{user.getFlash().article_error}}
+							</div>
+						{% endif %}
+						{% if user.hasFlashArray('article_success')%}
+							<div class="alert alert-success">
+								{{user.getFlash().article_success}}
+							</div>
+						{% endif %}
+	    			{% endif %}
+    					{{form|raw}}
+	    				<div class="row">
+	    					<div class="col-xs-12 text-center">
+	    						<br>
+	    						<button type="submit" class="btn btn-success btn-lg">Ajouter un article</button>
+	    					</div>
+		    			</div>
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+{% endblock %}

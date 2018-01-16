@@ -24,6 +24,7 @@ class ArticleFormBuilder extends FormBuilder
             "label"=> "Titre de l'article",
             "maxLength" => 50,
             "minLength" => 5,
+            "classCss" => "form-control",
             "validators" => [
                 new NotNullValidator("Vous devez écrire un titre"),
                 new MaxLengthValidator("Votre titre ne doit pas dépassé 50 caractères", 50),
@@ -33,6 +34,8 @@ class ArticleFormBuilder extends FormBuilder
         ->add(new TextField([
             "name" => "chapo",
             "label" => "Description courte",
+            "classCss" => "form-control",
+            "rows" => 5,
             "validators" => [
                 new NotNullValidator("Vous devez remplir ce champ"),
                 new MaxLengthValidator("Votre description ne doit pas dépassé 300 caractères", 300),
@@ -42,6 +45,8 @@ class ArticleFormBuilder extends FormBuilder
         ->add(new TextField([
             "name" => "contenu",
             "label" => "Contenu de l'article",
+            "classCss" => "form-control",
+            "rows" => 20,
             "validators" => [
                 new NotNullValidator("Ce champ ne doit pas resté vide")
             ]

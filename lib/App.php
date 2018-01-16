@@ -65,7 +65,7 @@ class App
         } catch (PageNotFoundException $e) {
             (new ErrorController($this))->error404()->send();
         } catch (\Exception $e) {
-            die($e->getMessage());
+            (new ErrorController($this))->error404()->send();
         }
     }
 }

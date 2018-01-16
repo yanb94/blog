@@ -25,7 +25,7 @@ class Comment extends Entity
         $this->contenu = $contenu;
     }
 
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }

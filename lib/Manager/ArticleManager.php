@@ -9,7 +9,7 @@ class ArticleManager extends Manager
 {
     public function add(Article $article)
     {
-        $dateNow = new \DateTime('now');
+        $dateNow = (new \DateTime('now'))->format('Y-m-d H:i:s');
 
         $req = $this->dao->prepare("
             INSERT INTO 
@@ -73,7 +73,7 @@ class ArticleManager extends Manager
 
     public function edit(Article $article)
     {
-        $dateNow = new \DateTime('now');
+        $dateNow = (new \DateTime('now'))->format('Y-m-d H:i:s');
 
         $req = $this->dao->prepare("
             UPDATE 
@@ -82,7 +82,8 @@ class ArticleManager extends Manager
                 titre = :titre,
                 chapo = :chapo,
                 contenu = :contenu,
-                updatedAt = :updatedAt
+                updatedAt = :updatedAt,
+                author = :author
             WHERE 
                 id = :id
             ");
@@ -92,6 +93,7 @@ class ArticleManager extends Manager
         $req->bindValue(':chapo', $article->getChapo());
         $req->bindValue(':contenu', $article->getContenu());
         $req->bindValue(':updatedAt', $dateNow);
+        $req->bindValue(':author', $article->getAuthor());
 
         $req->execute();
     }
@@ -118,6 +120,30 @@ class ArticleManager extends Manager
 
         $req->bindValue(':start', (int)$start, \PDO::PARAM_INT);
         $req->bindValue(':pagination', (int)$pagination, \PDO::PARAM_INT);
+
+        $req->execute();
+
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Article::class);
+
+        return $req->fetchAll();
+    }
+
+    public function getAll()
+    {
+        $req = $this->dao->prepare("
+            SELECT 
+                article.id,
+                article.titre,
+                article.chapo,
+                article.contenu,
+                article.author,
+                article.updatedAt,
+                member.login AS authorName
+            FROM article
+            LEFT JOIN 
+                member
+                ON article.author = member.id
+            ORDER BY article.updatedAt DESC");
 
         $req->execute();
 
