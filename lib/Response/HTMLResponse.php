@@ -20,6 +20,6 @@ class HTMLResponse extends Response
 
     public function send()
     {
-        exit($this->body);
+        echo($this->body);
     }
 }

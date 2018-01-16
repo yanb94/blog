@@ -8,7 +8,7 @@ class DateValidator extends Validator
 {
     public function isValid($value):bool
     {
-        if (isset($value['month']) and isset($value['day']) and isset($value['year'])) {
+        if (isset($value['month']) && isset($value['day']) && isset($value['year'])) {
             $date = new \DateTime($value['month']."/".$value['day']."/".$value['year']);
             return checkdate((int)$value['month'], (int)$value['day'], (int)$value['year']);
         }

@@ -110,7 +110,7 @@ class Member extends Entity implements UserInterface
 
     public function setSalt(string $salt)
     {
-        if ($salt != null and is_string($salt)) {
+        if (!is_null($salt) && is_string($salt)) {
             $this->salt = $salt;
         }
     }
@@ -142,7 +142,7 @@ class Member extends Entity implements UserInterface
 
     public function setConfirmationToken(string $confirmationToken)
     {
-        if ($confirmationToken != null and is_string($confirmationToken)) {
+        if (!is_null($confirmationToken) && is_string($confirmationToken)) {
             $this->confirmationToken = $confirmationToken;
         }
     }
@@ -156,7 +156,7 @@ class Member extends Entity implements UserInterface
     {
         if (is_string($this->birthDate)) {
             return $this->birthDate;
-        } elseif ($this->birthDate != null) {
+        } elseif (!is_null($this->birthDate)) {
             return $this->birthDate->format('Y-m-d');
         }
     }
@@ -196,7 +196,7 @@ class Member extends Entity implements UserInterface
 
     public function getPlainBirthDate()
     {
-        if (is_null($this->plainBirthDate) and !is_null($this->birthDate) and $this->birthDate instanceof \DateTime) {
+        if (is_null($this->plainBirthDate) && !is_null($this->birthDate) && $this->birthDate instanceof \DateTime) {
             $array = [
                 "day"=>$this->birthDate->format('d'),
                 "month"=>$this->birthDate->format('m'),
@@ -204,7 +204,7 @@ class Member extends Entity implements UserInterface
             ];
 
             return $array;
-        } elseif (is_null($this->plainBirthDate)and !is_null($this->birthDate) and is_string($this->birthDate)) {
+        } elseif (is_null($this->plainBirthDate) && !is_null($this->birthDate) && is_string($this->birthDate)) {
             $ar = explode('-', $this->birthDate);
 
             $array['day'] = $ar[2];
@@ -221,7 +221,7 @@ class Member extends Entity implements UserInterface
     {
         $this->plainBirthDate = $plainBirthDate;
 
-        if (isset($plainBirthDate['month']) and isset($plainBirthDate['day']) and isset($plainBirthDate['year'])) {
+        if (isset($plainBirthDate['month']) && isset($plainBirthDate['day']) && isset($plainBirthDate['year'])) {
             $date = new \DateTime($plainBirthDate['month'].'/'.$plainBirthDate['day'].'/'.$plainBirthDate['year']);
             $this->setBirthDate($date);
         }
