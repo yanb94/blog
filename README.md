@@ -30,11 +30,15 @@ Install dependencies with composer.
 composer update
 ```
 
+### Virtual Host
+
+For optimal working it is recommended to use a virtual host who are pointing on the folder web.
+
 ## Configuration 
 
 For that project works it is necessary to configure the file blog/config/config.xml
 
-** config.xml **
+**config.xml**
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <config>
