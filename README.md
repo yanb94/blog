@@ -22,6 +22,14 @@ git clone https://github.com/yanb94/blog.git
 
 You can download the repository at zip format and unzip it on your folder
 
+### Install dependencies 
+
+Install dependencies with composer.
+
+```sh
+composer update
+```
+
 ## Configuration 
 
 For that project works it is necessary to configure the file blog/config/config.xml
