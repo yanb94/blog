@@ -45,7 +45,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">Yann-Elias Bellagnech</a>
+                <a class="navbar-brand" href="{{url.generateUrl('home')}}">Yann-Elias Bellagnech</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,7 +58,7 @@
                         <a href="">Articles</a>
                     </li> #}
                     <li class="page-scroll">
-                        <a href="">Articles</a>
+                        <a href="{{url.generateUrl('listBlog',{'page':1})}}">Actualités</a>
                     </li>
                     {% if user.isGranted('ROLE_USER') %}
                         <li class="page-scroll">

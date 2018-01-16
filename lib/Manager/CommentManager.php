@@ -9,7 +9,7 @@ class CommentManager extends Manager
 {
     public function add(Comment $comment)
     {
-        $dateNow = new \DateTime('now');
+        $dateNow = (new \DateTime('now'))->format('Y-m-d H:i:s');
 
         $req = $this->dao->prepare("
             INSERT INTO
@@ -23,10 +23,10 @@ class CommentManager extends Manager
             ");
 
         $req->bindValue(':contenu', $comment->getContenu());
-        $req->bindValue(':createdAt', $dateNow);
+        $req->bindValue(':createdAt', (string)$dateNow);
         $req->bindValue(':author', $comment->getAuthor(), \PDO::PARAM_INT);
         $req->bindValue(':article', $comment->getArticle(), \PDO::PARAM_INT);
-        $red->bindValue(':validate', $comment->getValidate());
+        $req->bindValue(':validate', $comment->getValidate(), \PDO::PARAM_BOOL);
 
         $req->execute();
 
@@ -71,18 +71,15 @@ class CommentManager extends Manager
     {
         $req = $this->dao->prepare("
             SELECT 
-                id,
-                contenu,
-                createdAt,
-                author,
+                comment.id,
+                comment.contenu,
+                comment.createdAt,
+                comment.author,
                 member.login AS authorName,
                 article.titre AS articleName
             FROM 
                 comment 
-            WHERE 
-                article = :article 
-                AND 
-                validate = :validate 
+
             LEFT JOIN 
                 member
                 ON 
@@ -90,10 +87,15 @@ class CommentManager extends Manager
             LEFT JOIN 
                 article 
                 ON
-                    comment.article = article.id");
+                    comment.article = article.id
+            WHERE 
+                comment.article = :article 
+                AND 
+                comment.validate = :validate
+            ");
 
         $req->bindValue(':article', $articleId, \PDO::PARAM_INT);
-        $req->bindValue(':validate', true);
+        $req->bindValue(':validate', true, \PDO::PARAM_BOOL);
 
         $req->execute();
 
@@ -127,7 +129,7 @@ class CommentManager extends Manager
                     comment.article = article.id");
 
         $req->bindValue(':article', $articleId, \PDO::PARAM_INT);
-        $req->bindValue(':validate', false);
+        $req->bindValue(':validate', false, \PDO::PARAM_BOOL);
 
         $req->execute();
 
@@ -168,8 +170,8 @@ class CommentManager extends Manager
         $req->bindValue(':createdAt', $comment->getCreatedAt());
         $req->bindValue(':author', $comment->getAuthor(), \PDO::PARAM_INT);
         $req->bindValue(':article', $comment->getArticle(), \PDO::PARAM_INT);
-        $red->bindValue(':validate', $comment->getValidate());
-        $red->bindValue(':id', $comment->getId());
+        $red->bindValue(':validate', $comment->getValidate(), \PDO::PARAM_BOOL);
+        $red->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
 
         $req->execute();
     }

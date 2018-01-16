@@ -1,0 +1,94 @@
+{% extends '@core/layout.html.twig' %}
+
+{% block title %}{{article.titre}}{% endblock %}
+
+{% block body %}
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1>{{article.titre}}</h1>
+				</div>
+				<div class="col-xs-12 text-justify">
+					<p class="small">{{article.chapo}}</p>
+				</div>
+				<div class="col-xs-12 text-justify">
+					<p>{{article.contenu}}</p>
+				</div>
+				<div class="col-xs-6">
+					<span class="align-left">
+			    		Le
+			    		{{article.updatedAt|date('j')}}
+			    		{{article.updatedAt|date('n')|frenchMonth}}
+			    		{{article.updatedAt|date('Y ')}}
+			    		à
+			    		{{article.updatedAt|date(' G:i')}}
+				    </span>
+				</div>
+				<div class="col-xs-6 text-right">
+					<span>De {{article.authorName}}</span>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<hr class="star-primary">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Ajouter un commentaire</h2>
+					{% if user.isGranted('ROLE_USER') %}
+						<form action="{{url.generateUrl('articleOne',{'id': article.id})}}" method="post">
+							{% if user.hasFlash() %}
+								<div class="alert alert-success">
+									{{user.getFlash()}}
+								</div>
+							{% endif %}
+							{{form|raw}}
+
+							<button type="submit" class="btn btn-success btn-lg">Commentez cette article</button>
+						</form>
+					{% else %}
+						<div class="alert alert-danger">
+							Vous devez être connecté pour commenter cette article.
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="star-primary">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="my-h2-title">Les commentaires</h2>
+					{% for comment in comments %}
+					    <div class="my-comment col-xs-12 my-no-padding">
+					    	<div class="col-xs-12 my-comment-cont">
+					    		<p>
+					    			{{comment.contenu}}
+					    		</p>
+					    	</div>
+					    	<div class="col-xs-12 my-comment-detail">
+						    	<div class="col-xs-6" >
+						    		De {{comment.authorName}}
+						    	</div>
+						    	<div class="col-xs-6 text-right">
+						    		Le
+						    		{{comment.updatedAt|date('j')}}
+						    		{{comment.updatedAt|date('n')|frenchMonth}}
+						    		{{comment.updatedAt|date('Y ')}}
+						    		à
+						    		{{comment.updatedAt|date(' G:i')}}
+						    	</div>
+					    	</div>
+					    </div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

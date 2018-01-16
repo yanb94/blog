@@ -4,3 +4,60 @@
 	font-weight:bold;
 	font-size: 1.3em;
 }
+
+.my-cv-section
+{
+	background-color: #233140;
+}
+
+.my-white
+{
+	color:white;
+}
+
+.my-no-padding
+{
+	padding: 0!important;
+}
+
+.my-article-preview
+{
+	margin-bottom: 5em;
+}
+
+.my-article-preview-cont
+{
+	min-height: 220px;
+}
+
+.my-h2-title
+{
+	margin-bottom:1em!important;
+}
+
+.my-comment
+{
+	border: 1px solid silver;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px silver;
+    margin-bottom: 2em;
+}
+
+.my-comment-cont
+{
+	padding-top:20px;
+	min-height:150px;
+}
+
+.my-comment-detail
+{
+	border-top: 1px solid silver;
+}
+
+@media (max-width: 768px) {
+	
+	.my-article-preview-cont
+	{
+		min-height: auto;
+	}
+}

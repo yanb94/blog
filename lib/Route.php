@@ -151,6 +151,11 @@ class Route
         return $this;
     }
 
+    public function getVars(): array
+    {
+        return $this->vars;
+    }
+
     public function setVars(array $vars): self
     {
         $this->vars = $vars;

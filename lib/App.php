@@ -43,5 +43,22 @@ class App
 
     public function run()
     {
+        try {
+            $route = $this->router->getRoute($this->request->requestURI());
+            $module = $route->getModule();
+            $controller = $route->getController();
+
+
+            $controller = 'Application\\'.$module.'Module\\Controller\\'.$controller.'Controller';
+            $action = $route->getAction();
+
+            if ($route->hasVars()) {
+                (new $controller($this))->$action($route->getVars())->send();
+            } else {
+                (new $controller($this))->$action()->send();
+            }
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
     }
 }

@@ -11,26 +11,28 @@ $(function() {
             event.preventDefault();
             
             // get values from FORM
-            var name = $("input#name").val();
+            var lastname = $("input#lastname").val();
+            var firstname = $("input#firstname").val();
             var email = $("input#email").val();
-            var phone = $("input#phone").val();
             var message = $("textarea#message").val();
-            var firstName = name; // For Success/Failure Message
+            var crsf_token = $("input#crsf_token").val();
+            // var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
-            if (firstName.indexOf(' ') >= 0) {
-                firstName = name.split(' ').slice(0, -1).join(' ');
-            }
+            // if (firstName.indexOf(' ') >= 0) {
+            //     firstName = name.split(' ').slice(0, -1).join(' ');
+            // }
             $.ajax({
-                url: "././mail/contact_me.php",
+                url: "/contactMe",
                 type: "POST",
                 data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    message: message
+                    'form_contact[lastname]': lastname,
+                    'form_contact[firstname]': firstname,
+                    'form_contact[email]': email,
+                    'form_contact[message]': message,
+                    'form_contact[crsf_token]': crsf_token
                 },
                 cache: false,
-                success: function() {
+                success: function(data) {
                     // Enable button & show success message
                     $("#btnSubmit").attr("disabled", false);
                     $('#success').html("<div class='alert alert-success'>");
