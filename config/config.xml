@@ -6,4 +6,11 @@
 			<role_child name="ROLE_USER"></role_child>
 		</role>
 	</role_hierarchy>
+	<twig>
+		<paths>
+			<path name="admin" value="/src/AdminModule/view"/>
+			<path name="public" value="/src/PublicModule/view"/>
+			<path name="core" value="/view"/>
+		</paths>
+	</twig>
 </config>
