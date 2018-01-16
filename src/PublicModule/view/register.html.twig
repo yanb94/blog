@@ -1,0 +1,31 @@
+{% extends '@core/layout.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <section>
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-xs-12">
+    				<h1>Formulaire d'inscription</h1>
+    			</div>
+	    		<div class="col-xs-12">
+	    			<form action="{{url.generateUrl('register')}}" method="post">
+	    				{% if user.hasFlash %}
+							<div class="alert alert-danger">
+								{{user.getFlash()}}
+							</div>
+	    				{% endif %}
+	    				{{form|raw}}
+	    				<div class="row">
+	    					<div class="col-xs-12 text-center">
+	    						<br>
+	    						<button type="submit" class="btn btn-success btn-lg">S'inscrire</button>
+	    					</div>
+	    				</div>
+	    			</form>
+	    		</div>
+    		</div>
+    	</div>
+    </section>
+{% endblock %}
