@@ -1,4 +1,4 @@
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/83237ba4-5206-480b-80b5-bc85517d2924/mini.png)](https://insight.sensiolabs.com/projects/83237ba4-5206-480b-80b5-bc85517d2924)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/d5eaf75f-e9c9-4b79-bff6-75cee60c9e43/big.png)](https://insight.sensiolabs.com/projects/d5eaf75f-e9c9-4b79-bff6-75cee60c9e43)
 # Personal Blog
 
 This repository contains my personal blog for the realization of the Project 5 of the formation "Développeur d'application - PHP / Symfony" on Openclassroom.
