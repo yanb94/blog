@@ -95,7 +95,7 @@ class UserController extends Controller
                      : <a href='$urlValidation'>$urlValidation</a>
 			        \n\n";
                     $headers = "From: noreply@myblog.com\n";
-                    $headers  = 'MIME-Version: 1.0' . "\r\n";
+                    $headers .= 'MIME-Version: 1.0' . "\r\n";
                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                     mail($to, $email_subject, $email_body, $headers);

@@ -181,7 +181,7 @@ class Route
 
     public function setValidateVars(array $validateVars): self
     {
-        $this->validateVars = $vars;
+        $this->validateVars = $validateVars;
 
         return $this;
     }
