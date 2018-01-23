@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <config>
-	<database host="localhost" db="blog_op" user="root" password=""/>
+	<database host="<YOUR HOST>" db="<DATABASE NAME>" user="<USER>" password="<PASSWORD>"/>
 	<role_hierarchy>
 		<role name="ROLE_ADMIN">
 			<role_child name="ROLE_USER"></role_child>
@@ -14,6 +14,6 @@
 		</paths>
 	</twig>
 	<info_user>
-		<email value="yann-elias@wanadoo.fr"></email>
+		<email value="<YOUR EMAIL>"></email>
 	</info_user>
 </config>
