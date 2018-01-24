@@ -94,6 +94,7 @@ class CommentManager extends Manager
                 comment.article = :article 
                 AND 
                 comment.validate = :validate
+            ORDER BY comment.createdAt DESC
             ");
 
         $req->bindValue(':article', $articleId, \PDO::PARAM_INT);
